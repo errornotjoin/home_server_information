@@ -45,6 +45,7 @@ def get_drive_file_names():
                 #print folder and file names with creation date and time
                 for name in folder:
                     #print("Folder name: " + name)
+                    #getting the folder path and size
                     folder_path = os.path.join(current_path, name)
                     folder_size_value = os.path.getsize(folder_path)
                     folder_name.append(name)
@@ -66,10 +67,13 @@ def get_drive_file_names():
                 for name in files:
                     #print file name and creation date and time
                     file_name.append(name)
+                    #get file creation date and time
                     creation_date.append(datetime.datetime.fromtimestamp(os.path.getmtime(current_path + "\\" + name)).strftime("%y-%m-%d %H:%M:%S"))
+                    #getting the file path and size
                     file_path = os.path.join(current_path, name)
                     file_paths.append(current_path + "\\" + name)
-                    file_size_value = os.path.getsize(file_path)    
+                    file_size_value = os.path.getsize(file_path)
+                    #get file size in KB, MB, GB    
                     if file_size_value >= 1024 ** 3:
                         file_size.append(str(round(file_size_value / (1024 ** 3))) +"GB")
                     elif file_size_value >= 1024 ** 2:
@@ -105,6 +109,8 @@ need_to_check = False
 def getting_drivces_basic_info():
     with open("yml_files/list_of_drives.yml", 'r') as ymlfile:
         cfg = yaml.safe_load(ymlfile)
+        # i might remove the text file method as it can be annoying
+        # when trying test it when its at the same time as the file 
         last_check = open("txt_files/last_check.txt", 'r') 
         user_manual_scan = open("txt_files/User_what_to_check.txt", 'r')
         last_check_value = last_check.read()
