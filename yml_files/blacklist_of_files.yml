@@ -1,2 +1,3 @@
+#what to NOT to scan
 blackList_files:
     - c:/

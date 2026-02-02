@@ -1,1 +1,0 @@
-User_manual_scan = false
