@@ -127,12 +127,7 @@ def getting_drivces_basic_info():
             last_check.close()
             user_manual_scan.close()
         if need_to_check == True:
-            #asking user if they want to see drive information 
-            #only if the user is in visual code or terminal 
-            #as php can't handle input function like this
-            #this just been removed for now to make it work with php
-            #you can add it back if you are only using terminal or visual code
-            #user_input = input("Do you want to see drive information while scanning? (y/n): ")
+
             user_input = 'n'  #default to no if manual scan
             for drive in cfg['drives']:        
                 try:
