@@ -8,7 +8,7 @@ mysql_execution = sql_login.connection.cursor(buffered=True)
 
 time = datetime.datetime.now()
 more = time.strftime("%Y-%m-%d %H:%M:%S")
-
+#TO BE CHANGED AS IT WILL BREAK AS I REMOVED THE TEXT FILES
 def upload_drives_information(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check, folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths,creation_date):
     try: 
         for i in range(len(drive_names)):

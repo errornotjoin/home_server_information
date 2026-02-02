@@ -1,9 +1,7 @@
 import mysql.connector
 
+# this code will be change to add yml configuration later
 # Establish a connection to the MySQL database
-#MUST CHANGE CREDENTIALS BELOW TO YOUR OWN MYSQL SERVER CREDENTIALS
-#MUST HAVE SAME SQL TABLES AS IN THE DATABASE SCHEMA
-#AS IT WILL NOT WORK WITHOUT THEM
 connection = mysql.connector.connect(
     host="localhost",
     user="root",
