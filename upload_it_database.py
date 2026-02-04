@@ -14,18 +14,20 @@ def upload_drives_information(drive_names, total_sizes, used_spaces, free_spaces
         for i in range(len(drive_names)):
             sql_Code = "SELECT drivecs_Name FROM drivces_ WHERE drivecs_Name = %s"
             mysql_execution.execute(sql_Code, (drive_names[i],))
-            if mysql_execution.fetchone() is None:
+            if mysql_execution.fetchone() is None and drive_names[i] != "":
                 # Drive does not exist, perform INSERT
                 sql_Code = "INSERT INTO drivces_ (drivecs_Name, drivces_size, drive_Used, drivces_free_space,last_check, When_added) VALUES (%s, %s, %s, %s, %s, %s)"
                 values = (drive_names[i], total_sizes[i], used_spaces[i], free_spaces[i], driveces_last_check[i], more)
                 mysql_execution.execute(sql_Code, values)
                 sql_login.connection.commit()
-            else:
+            elif drive_names[i] != "":
                 # Drive exists, perform UPDATE
                 sql_Code = "UPDATE drivces_ SET drivces_size = %s, drive_Used = %s, drivces_free_space = %s, last_check = %s WHERE drivecs_Name = %s"
                 values = (total_sizes[i], used_spaces[i], free_spaces[i], driveces_last_check[i], drive_names[i])
                 mysql_execution.execute(sql_Code, values)
                 sql_login.connection.commit()
+            else:
+                continue
     except mysql.connector.Error as err:
         pass
     except KeyboardInterrupt:
