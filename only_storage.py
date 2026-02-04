@@ -89,5 +89,5 @@ def get_drive_file_names(drive_names, total_sizes, used_spaces, free_spaces,driv
                         print("Continuing process...")
                         continue
         print("File and folder information collected.")
-        upload_it_database.upload_drives_information(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check, folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths,creation_date)
+        upload_it_database.uploading_folder(folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths)
      

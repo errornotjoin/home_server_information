@@ -1,5 +1,5 @@
 #drives to scan
 drives: 
-  - D:\
-  - E:\
-  - F:\
+  - D:\\
+  - G:\\
+  - H:\\

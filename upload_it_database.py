@@ -12,6 +12,7 @@ more = time.strftime("%Y-%m-%d %H:%M:%S")
 def upload_drives_information(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check, folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths,creation_date):
     try: 
         for i in range(len(drive_names)):
+            more = time.strftime("%Y-%m-%d %H:%M:%S")
             sql_Code = "SELECT drivecs_Name FROM drivces_ WHERE drivecs_Name = %s"
             mysql_execution.execute(sql_Code, (drive_names[i],))
             if mysql_execution.fetchone() is None and drive_names[i] != "":
@@ -37,6 +38,7 @@ def upload_drives_information(drive_names, total_sizes, used_spaces, free_spaces
 def uploading_folder(folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths):
     try:
         for i in range(len(folder_name)):
+            more = time.strftime("%Y-%m-%d %H:%M:%S")
             sql_code = "SELECT folders_Name FROM folders WHERE folders_Name = %s AND Paths = %s"
             mysql_execution.execute(sql_code, (folder_name[i], folder_paths[i]))
             if mysql_execution.fetchone() is None:
@@ -50,6 +52,7 @@ def uploading_folder(folder_name,folder_dates,folder_size,folder_paths,file_name
                 values = (folder_name[i], folder_size[i], folder_dates[i], more, folder_name[i], folder_paths[i])
                 mysql_execution.execute(sql_code, values)
                 sql_login.connection.commit()
+            print(colorama.Fore.BLUE + "Uploaded/Updated folder: " + folder_name[i] + " at path: " + folder_paths[i] + colorama.Style.RESET_ALL)
     except mysql.connector.Error as err:
         pass
     except KeyboardInterrupt:
@@ -59,6 +62,7 @@ def uploading_folder(folder_name,folder_dates,folder_size,folder_paths,file_name
 def uploading_files(file_name,file_size,file_extension,file_paths,):
     try:
         for i in range(len(file_name)):
+            more = time.strftime("%Y-%m-%d %H:%M:%S")
             sql_code = "SELECT file_name FROM files WHERE file_name = %s AND file_paths = %s"
             mysql_execution.execute(sql_code, (file_name[i], file_paths[i]))
             if mysql_execution.fetchone() is None:
@@ -72,6 +76,7 @@ def uploading_files(file_name,file_size,file_extension,file_paths,):
                 values = (file_size[i], file_extension[i], more, file_name[i], file_paths[i])
                 mysql_execution.execute(sql_code, values)
                 sql_login.connection.commit()
+            print(colorama.Fore.GREEN + "Uploaded/Updated file: " + file_name[i] + " at path: " + file_paths[i] + colorama.Style.RESET_ALL)
     except mysql.connector.Error as err:
         pass
     except KeyboardInterrupt:
