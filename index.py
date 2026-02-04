@@ -69,7 +69,6 @@ with open("yml_files/what_type_of_scan.yml", 'r') as ymlfile:
     ctf = yaml.safe_load(ymlfile)
     for scan_type in ctf['types_of_scans']:
         items = scan_type
-        print(items)
         if items == 'full_scan' and ctf['types_of_scans'][items]['booledan'] == True:
             print("Starting full scan...")
             getting_drivces_basic_info(True)
