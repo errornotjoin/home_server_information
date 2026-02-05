@@ -82,8 +82,6 @@ with open("yml_files/what_type_of_scan.yml", 'r') as ymlfile:
                 for drive in cfg['drives']:
                     drivecs_little.append(drive)
             only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check)
-      
-        
 
 
 

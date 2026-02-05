@@ -1,8 +1,8 @@
 #keep this file hidden as it contains sensitive information
 #for sql server connection
 sql_information:
-  UserName: sa
-  Password: YourStrong!Passw0rd
+  UserName: root
+  Password: 
   Server: localhost
-  Database: master
+  Database: local_server_storage
   Trusted_Connection: no
