@@ -29,12 +29,17 @@ def get_drive_file_names(drive_names, total_sizes, used_spaces, free_spaces,driv
                 try:
                     #if there are no files or folders, raise an exception
                     #print("Current Path: " + str(current_path))
-                    file_paths.append(current_path)
+                    #file_paths.append(current_path)
                     #print folder and file names with creation date and time
                     for name in folder:
                         #print("Folder name: " + name)
                         #getting the folder path and size
                         folder_path = os.path.join(current_path, name)
+
+                        new_folder_path = folder_path
+                        new_folder_path = new_folder_path.replace("\\", "/")
+                        folder_paths.append(new_folder_path)
+
                         folder_size_value = os.path.getsize(folder_path)
                         folder_name.append(name)
                         #print("Folder name added: " + name)
@@ -50,17 +55,23 @@ def get_drive_file_names(drive_names, total_sizes, used_spaces, free_spaces,driv
                             folder_size.append(str(round(folder_size_value / (1024))) +"KB")
                         else:
                             folder_size.append("0KB")
-                        folder_dates.append(datetime.datetime.fromtimestamp(os.path.getmtime(current_path + "\\" + name)).strftime("%y-%m-%d %H:%M:%S"))
-                        folder_paths.append(current_path + "\\" + name)
+                        folder_dates.append(datetime.datetime.fromtimestamp(os.path.getmtime(folder_path)).strftime("%y-%m-%d %H:%M:%S"))
+                        #don't know why that is there but it is there in the original code, so I will keep it there
+                        #folder_paths.append(folder_path)
                     for name in files:
                         #print file name and creation date and time
                         file_name.append(name)
                         #get file creation date and time
-                        creation_date.append(datetime.datetime.fromtimestamp(os.path.getmtime(current_path + "\\" + name)).strftime("%y-%m-%d %H:%M:%S"))
-                        #getting the file path and size
                         file_path = os.path.join(current_path, name)
-                        file_paths.append(current_path + "\\" + name)
+                        creation_date.append(datetime.datetime.fromtimestamp(os.path.getmtime(file_path)).strftime("%y-%m-%d %H:%M:%S"))
+                        #getting the file path and size
+                        #making it eastier for php to read the file path by replacing backslashes with forward slashes
+                        new_file_path = os.path.join(current_path, name)
+                        new_file_path = new_file_path.replace("\\", "/")
+                        file_paths.append(new_file_path)
                         file_size_value = os.path.getsize(file_path)
+                        #get file creation date and time
+                        creation_date.append(datetime.datetime.fromtimestamp(os.path.getmtime(file_path)).strftime("%y-%m-%d %H:%M:%S"))
                         #get file size in KB, MB, GB    
                         if file_size_value >= 1024 ** 3:
                             file_size.append(str(round(file_size_value / (1024 ** 3))) +"GB")

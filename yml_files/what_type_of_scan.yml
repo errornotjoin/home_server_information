@@ -7,14 +7,14 @@ types_of_scans:
 
     drive_only_scan: 
       #this scan will only check drive information
-      booledan: True
+      booledan: False
 
     custom_scan: 
       #don't know yet, i might remove or not
       booledan: false
     Folder_file_only_scan:
       #this scan will only check files and folders in the specified directories
-      booledan: False
+      booledan: True
 
     all_uploads_scan: 
       #all the program to uploads the save data to the server
