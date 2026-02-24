@@ -66,7 +66,7 @@ def getting_drivces_basic_info():
         if  scan_allowed[0] == "full_scan":
             only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check, scan_allowed)
         else:
-            upload_it_database.upload_drives_information(drivecs_little, drivces_size, drive_Used, drivces_free_space, driveces_last_check, [], [], [], [], [], [], [], [],scan_allowed)
+            upload_it_database.upload_drives_information(drivecs_little, drivces_size, drive_Used, drivces_free_space, driveces_last_check, [], [], [], [], [], [], [], [])
 
 with open("yml_files/what_type_of_scan.yml", 'r') as ymlfile:
     ctf = yaml.safe_load(ymlfile)
