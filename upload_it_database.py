@@ -2,7 +2,7 @@
 import sql_login
 import mysql.connector
 import datetime
-import colorama
+
 ##sql IMPRTANT LINES
 mysql_execution = sql_login.connection.cursor(buffered=True)
 
@@ -52,7 +52,7 @@ def uploading_folder(folder_name,folder_dates,folder_size,folder_paths,file_name
                 values = (folder_name[i], folder_size[i], folder_dates[i], more, folder_name[i], folder_paths[i])
                 mysql_execution.execute(sql_code, values)
                 sql_login.connection.commit()
-            print(colorama.Fore.BLUE + "Uploaded/Updated folder: " + folder_name[i] + " at path: " + folder_paths[i] + colorama.Style.RESET_ALL)
+            print(colorama.Fore.BLUE + "Uploaded/Updated folder: " + folder_name[i] + " at path: " + folder_paths[i] + colorama.Style.RESET_ALL, flush=True)
     except mysql.connector.Error as err:
         pass
     except KeyboardInterrupt:
@@ -76,7 +76,7 @@ def uploading_files(file_name,file_size,file_extension,file_paths,):
                 values = (file_size[i], file_extension[i], more, file_name[i], file_paths[i])
                 mysql_execution.execute(sql_code, values)
                 sql_login.connection.commit()
-            print(colorama.Fore.GREEN + "Uploaded/Updated file: " + file_name[i] + " at path: " + file_paths[i] + colorama.Style.RESET_ALL)
+            print(colorama.Fore.GREEN + "Uploaded/Updated file: " + file_name[i] + " at path: " + file_paths[i] + colorama.Style.RESET_ALL, flush=True)
     except mysql.connector.Error as err:
         pass
     except KeyboardInterrupt:

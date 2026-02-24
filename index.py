@@ -37,7 +37,7 @@ def getting_drivces_basic_info(is_full_scan):
     with open("yml_files/list_of_drives.yml", 'r') as ymlfile:
         cfg = yaml.safe_load(ymlfile)
         for drive in cfg['drives']:     
-            print("Checking drive: " + drive)   
+            print("Checking drive: " + drive, flush=True)   
             try:
                 driveces_last_check.append(Date)
                 drivecs_little.append(drive)
@@ -48,35 +48,34 @@ def getting_drivces_basic_info(is_full_scan):
 
             #this exception is raised when the drive is not accessible
             except PermissionError:
-                print("Permission denied to access drive: " + drive)
+                print("Permission denied to access drive: " + drive, flush=True)
             except FileNotFoundError:
-                print("Drive not found: " + drive)
+                print("Drive not found: " + drive, flush=True)
             except UnboundLocalError:
-                print("Drive not found: " + drive)
+                print("Drive not found: " + drive, flush=True)
             except Exception as e:
-                print("An error occurred while accessing drive: " + drive)
-                print(str(e))
-        print("Drive information collected.")
-        print(len(drivecs_little), len(drivces_size), len(drive_Used), len(drivces_free_space), len(driveces_last_check))
+                print("An error occurred while accessing drive: " + drive, flush=True)
+                print(str(e), flush=True)
+        print("Drive information collected.", flush=True)
+        print(len(drivecs_little), len(drivces_size), len(drive_Used), len(drivces_free_space), len(driveces_last_check), flush=True)
         #update last check date and time
-        if is_full_scan:
+        if  is_full_scan == "True":
             only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check)
         else:
             upload_it_database.upload_drives_information(drivecs_little, drivces_size, drive_Used, drivces_free_space, driveces_last_check, [], [], [], [], [], [], [], [])
-            print("Drive information updated in the database.")
 
 with open("yml_files/what_type_of_scan.yml", 'r') as ymlfile:
     ctf = yaml.safe_load(ymlfile)
     for scan_type in ctf['types_of_scans']:
         items = scan_type
-        if items == 'full_scan' and ctf['types_of_scans'][items]['booledan'] == True:
-            print("Starting full scan...")
-            getting_drivces_basic_info(True)
-        elif items == 'drive_only_scan' and ctf['types_of_scans'][items]['booledan'] == True:
-            print("Starting drive only scan...")
-            getting_drivces_basic_info(False)
-        elif items == 'Folder_file_only_scan' and ctf['types_of_scans'][items]['booledan'] == True:
-            print("Starting folder and file only scan...")
+        if items == 'full_scan' and ctf['types_of_scans'][items]['booledan'] == "True":
+            print("Starting full scan...", flush=True)
+            getting_drivces_basic_info("True")
+        elif items == 'drive_only_scan' and ctf['types_of_scans'][items]['booledan'] == "True":
+            print("Starting drive only scan...", flush=True)
+            getting_drivces_basic_info("True")
+        elif items == 'Folder_file_only_scan' and ctf['types_of_scans'][items]['booledan'] == "True":
+            print("Starting folder and file only scan...", flush=True)
             with open("yml_files/list_of_drives.yml", 'r') as ymlfile:
                 cfg = yaml.safe_load(ymlfile)
                 for drive in cfg['drives']:

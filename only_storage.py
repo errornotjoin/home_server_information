@@ -18,7 +18,7 @@ folder_size = []
 creation_date = []
 def get_drive_file_names(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check):
     #function to get file and folder names in the drives
-    print("Collecting file and folder information from drives...")
+    print("Collecting file and folder information from drives...", flush=True)
     with open("yml_files/list_of_drives.yml", 'r') as ymlfile:
         cfg = yaml.safe_load(ymlfile)
         for drive in cfg['drives']:
@@ -94,19 +94,19 @@ def get_drive_file_names(drive_names, total_sizes, used_spaces, free_spaces,driv
                 except KeyboardInterrupt:
                     user_input = input("Process interrupted by user. Do you want to exit? (y/n): ")
                     if user_input.lower() == 'y':
-                        print("Process interrupted by user.")
+                        print("Process interrupted by user.", flush=True)
                         exit()
                     else:
-                        print("Continuing process...")
+                        print("Continuing process...", flush=True)
                         continue
-        print("File and folder information collected.")
+        print("File and folder information collected.", flush=True)
     with open("yml_files/what_type_of_scan.yml", 'r') as ymlfile:
         ctf = yaml.safe_load(ymlfile)
         for scan_type in ctf['types_of_scans']:
             items = scan_type
-            print(items)
-            if items == 'full_scan' and  ctf['types_of_scans'][items]['booledan'] == True:
-                print("Starting full scan...")
+            print(items, flush=True)
+            if items == 'full_scan' and  ctf['types_of_scans'][items]['booledan'] == "True":
+                print("Starting full scan...", flush=True)
                 upload_it_database.upload_drives_information(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check,folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths)
-            elif items == 'Folder_file_only_scan' and ctf['types_of_scans'][items]['booledan'] == True:
+            elif items == 'Folder_file_only_scan' and ctf['types_of_scans'][items]['booledan'] == "True":
                 upload_it_database.uploading_folder(folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths)

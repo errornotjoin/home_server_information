@@ -1,35 +1,7 @@
 types_of_scans:
-# configuration for different types of scans
-
-    full_scan: 
-      #this scan will check everything including drive information and all files and folders in that drive
-      booledan: False
-
-    drive_only_scan: 
-      #this scan will only check drive information
-      booledan: False
-
-    custom_scan: 
-      #don't know yet, i might remove or not
-      booledan: false
-    Folder_file_only_scan:
-      #this scan will only check files and folders in the specified directories
-      booledan: True
-
-    all_uploads_scan: 
-      #all the program to uploads the save data to the server
-      booledan: false
-
-#information:
-#  scans:
-#    full_scan_info:
-#      has_user_manual_scan: false
-#      last_full_scan_date: 0000-00-00 00:00:00
-#
-#    drive_only_scan_info:
-#      has_user_manual_scan: false
-#      last_drive_only_scan_date: 0000-00-00 00:00:00
-#
-#    custom_scan_info:
-#      has_user_manual_scan: false
-#      last_custom_scan_date: 0000-00-00 00:00:00
+  full_scan:
+    booledan: 'False'
+  drive_only_scan:
+    booledan: 'True'
+  Folder_file_only_scan:
+    booledan: 'False'
