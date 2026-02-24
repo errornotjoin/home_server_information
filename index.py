@@ -15,6 +15,7 @@ drive_Used = []
 drivces_free_space = []
 drivecs_little = []
 driveces_last_check = []
+
 #items that won't be scanned
 #note this feature is not yet implemented
 #you can remove the drives from the yml file (list_of_drives.yml)
@@ -23,6 +24,9 @@ blacklisted_files = []
 
 #last check time list
 last_check = []
+
+scan_type = []
+scan_allowed = []
 
 
 #get current date and time
@@ -33,7 +37,7 @@ Date = time.strftime("%y-%m-%d %H:%M:%S")
 need_to_check = False
 
 
-def getting_drivces_basic_info(is_full_scan):
+def getting_drivces_basic_info():
     with open("yml_files/list_of_drives.yml", 'r') as ymlfile:
         cfg = yaml.safe_load(ymlfile)
         for drive in cfg['drives']:     
@@ -59,28 +63,31 @@ def getting_drivces_basic_info(is_full_scan):
         print("Drive information collected.", flush=True)
         print(len(drivecs_little), len(drivces_size), len(drive_Used), len(drivces_free_space), len(driveces_last_check), flush=True)
         #update last check date and time
-        if  is_full_scan == "True":
-            only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check)
+        if  scan_allowed[0] == "full_scan":
+            only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check, scan_allowed)
         else:
-            upload_it_database.upload_drives_information(drivecs_little, drivces_size, drive_Used, drivces_free_space, driveces_last_check, [], [], [], [], [], [], [], [])
+            upload_it_database.upload_drives_information(drivecs_little, drivces_size, drive_Used, drivces_free_space, driveces_last_check, [], [], [], [], [], [], [], [],scan_allowed)
 
 with open("yml_files/what_type_of_scan.yml", 'r') as ymlfile:
     ctf = yaml.safe_load(ymlfile)
     for scan_type in ctf['types_of_scans']:
         items = scan_type
         if items == 'full_scan' and ctf['types_of_scans'][items]['booledan'] == "True":
+            scan_allowed.append(items)
             print("Starting full scan...", flush=True)
-            getting_drivces_basic_info("True")
+            getting_drivces_basic_info()
         elif items == 'drive_only_scan' and ctf['types_of_scans'][items]['booledan'] == "True":
+            scan_allowed.append(items)
             print("Starting drive only scan...", flush=True)
-            getting_drivces_basic_info("True")
+            getting_drivces_basic_info()
         elif items == 'Folder_file_only_scan' and ctf['types_of_scans'][items]['booledan'] == "True":
+            scan_allowed.append(items)
             print("Starting folder and file only scan...", flush=True)
             with open("yml_files/list_of_drives.yml", 'r') as ymlfile:
                 cfg = yaml.safe_load(ymlfile)
                 for drive in cfg['drives']:
                     drivecs_little.append(drive)
-            only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check)
+            only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check, scan_allowed)
 
 
 
