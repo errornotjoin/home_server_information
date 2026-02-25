@@ -2,6 +2,6 @@ types_of_scans:
   full_scan:
     booledan: 'False'
   drive_only_scan:
-    booledan: 'True'
-  Folder_file_only_scan:
     booledan: 'False'
+  Folder_file_only_scan:
+    booledan: 'True'

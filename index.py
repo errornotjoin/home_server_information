@@ -74,14 +74,17 @@ with open("yml_files/what_type_of_scan.yml", 'r') as ymlfile:
         items = scan_type
         if items == 'full_scan' and ctf['types_of_scans'][items]['booledan'] == "True":
             scan_allowed.append(items)
+            print(scan_allowed)
             print("Starting full scan...", flush=True)
             getting_drivces_basic_info()
         elif items == 'drive_only_scan' and ctf['types_of_scans'][items]['booledan'] == "True":
             scan_allowed.append(items)
+            print(scan_allowed)
             print("Starting drive only scan...", flush=True)
             getting_drivces_basic_info()
         elif items == 'Folder_file_only_scan' and ctf['types_of_scans'][items]['booledan'] == "True":
             scan_allowed.append(items)
+            print(scan_allowed)
             print("Starting folder and file only scan...", flush=True)
             with open("yml_files/list_of_drives.yml", 'r') as ymlfile:
                 cfg = yaml.safe_load(ymlfile)

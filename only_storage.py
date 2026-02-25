@@ -102,6 +102,6 @@ def get_drive_file_names(drive_names, total_sizes, used_spaces, free_spaces,driv
         print("File and folder information collected.", flush=True)
         if  scan_allowed[0] == 'full_scan':
                 print("Starting full scan...", flush=True)
-                upload_it_database.upload_drives_information(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check,folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths,scan_allowed)
-        elif scan_allowed[0] == 'drive_only_scan':
+                upload_it_database.upload_drives_information(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check,folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths)
+        elif scan_allowed[0] == 'Folder_file_only_scan':
                 upload_it_database.uploading_folder(folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths)
