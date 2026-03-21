@@ -2,7 +2,9 @@
 #DON@T REMOVE ANY OF THESE IMPORTS AS THEY ARE ALL NECESSARY FOR THE SCRIPT TO WORK
 import psutil
 import yaml
+
 import datetime
+
 #files in the folder 
 #these are required for the script to work
 #make sure these files are in the same folder as this script
@@ -32,7 +34,8 @@ scan_allowed = []
 #get current date and time
 time = datetime.datetime.now()
 Date = time.strftime("%y-%m-%d %H:%M:%S")
-
+import time 
+Dates = time.perf_counter()
 #flag to check if we need to check drives info
 need_to_check = False
 
@@ -64,11 +67,12 @@ def getting_drivces_basic_info():
         print(len(drivecs_little), len(drivces_size), len(drive_Used), len(drivces_free_space), len(driveces_last_check), flush=True)
         #update last check date and time
         if  scan_allowed[0] == "full_scan":
-            only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check, scan_allowed)
+            only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check, scan_allowed, Dates)
         else:
-            upload_it_database.upload_drives_information(drivecs_little, drivces_size, drive_Used, drivces_free_space, driveces_last_check, [], [], [], [], [], [], [], [])
+            upload_it_database.upload_drives_information(drivecs_little, drivces_size, drive_Used, drivces_free_space, driveces_last_check, [], [], [], [], [], [], [], [],scan_allowed, Dates)
 
 with open("yml_files/what_type_of_scan.yml", 'r') as ymlfile:
+    
     ctf = yaml.safe_load(ymlfile)
     for scan_type in ctf['types_of_scans']:
         items = scan_type
@@ -90,7 +94,7 @@ with open("yml_files/what_type_of_scan.yml", 'r') as ymlfile:
                 cfg = yaml.safe_load(ymlfile)
                 for drive in cfg['drives']:
                     drivecs_little.append(drive)
-            only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check, scan_allowed)
+            only_storage.get_drive_file_names(drivecs_little, drivces_size, drive_Used, drivces_free_space,driveces_last_check, scan_allowed, Dates)
 
 
 

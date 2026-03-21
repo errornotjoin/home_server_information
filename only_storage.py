@@ -16,8 +16,10 @@ folder_paths = []
 folder_dates = []
 folder_size = []
 creation_date = []
-def get_drive_file_names(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check,scan_allowed):
+def get_drive_file_names(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check,scan_allowed, Dates):
     #function to get file and folder names in the drives
+
+    new_scan = scan_allowed
     print("Collecting file and folder information from drives...", flush=True)
     with open("yml_files/list_of_drives.yml", 'r') as ymlfile:
         cfg = yaml.safe_load(ymlfile)
@@ -45,16 +47,16 @@ def get_drive_file_names(drive_names, total_sizes, used_spaces, free_spaces,driv
                         #print("Folder name added: " + name)
                         #get folder size in KB, MB, GB
                         if folder_size_value >= 1024 ** 3:
-                            folder_size.append(str(round(folder_size_value / (1024 ** 3))) +"GB")
+                            folder_size.append(folder_size_value)
                             #print("Folder size in GB added." + str(round(folder_size_value / (1024 ** 3))) +"GB")
                         elif folder_size_value >= 1024 ** 2:
                             #print("Folder size in MB added." + str(round(folder_size_value / (1024 ** 2))) +"MB")
-                            folder_size.append(str(round(folder_size_value / (1024 ** 2))) +"MB")
+                            folder_size.append(folder_size_value)
                         elif folder_size_value >= 1024:
                             #print("Folder size in KB added.")
-                            folder_size.append(str(round(folder_size_value / (1024))) +"KB")
+                            folder_size.append(folder_size_value)
                         else:
-                            folder_size.append("0KB")
+                            folder_size.append(folder_size_value)
                         folder_dates.append(datetime.datetime.fromtimestamp(os.path.getmtime(folder_path)).strftime("%y-%m-%d %H:%M:%S"))
                         #don't know why that is there but it is there in the original code, so I will keep it there
                         #folder_paths.append(folder_path)
@@ -102,6 +104,6 @@ def get_drive_file_names(drive_names, total_sizes, used_spaces, free_spaces,driv
         print("File and folder information collected.", flush=True)
         if  scan_allowed[0] == 'full_scan':
                 print("Starting full scan...", flush=True)
-                upload_it_database.upload_drives_information(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check,folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths)
+                upload_it_database.upload_drives_information(drive_names, total_sizes, used_spaces, free_spaces,driveces_last_check,folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths ,scan_allowed ,Dates)
         elif scan_allowed[0] == 'Folder_file_only_scan':
-                upload_it_database.uploading_folder(folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths)
+                upload_it_database.uploading_folder(folder_name,folder_dates,folder_size,folder_paths,file_name,file_size,file_extension,file_paths,scan_allowed, Dates)
